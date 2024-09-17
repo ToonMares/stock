@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Market Game</title>
+    <link rel="icon" href="files/favicon.png" type="image/png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        #game-container {
+            margin-top: 20px;
+            display: none;
+        }
+        #data-container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        #stock-price, #portfolio, #day, #shares {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 20px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #sell-btn {
+            background-color: #f44336;
+        }
+        #sell-btn:hover {
+            background-color: #d32f2f;
+        }
+        #end-container {
+            display: none;
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        #profit-loss {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+        #play-again-btn {
+            background-color: #2196F3;
+        }
+        #play-again-btn:hover {
+            background-color: #1976D2;
+        }
+        #chart-container {
+            width: 50%;
+            margin: 20px auto;
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        #instructions, #more-projects {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+        #instructions p, #more-projects p {
+            margin: 0;
+        }
+        #instructions img {
+            background-color: black;
+            border-radius: 25px;
+            padding: 5px;
+            margin: 20px;
+            width: 40%;
+            max-width: 100%;
+            height: auto;
+            margin-top: 40px;
+            margin: 5px;
+        }
+        #more-projects a {
+            color: #2196F3;
+            text-decoration: none;
+        }
+        #more-projects a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>30-Day Stock Market Game</h1>
+    
+    <div id="start-container">
+        <button id="start-btn">Start Game</button>
+        <div id="instructions">
+            <p>You start with $100. You can buy or sell a fake stock each day.</p>
+            <p>The goal is to maximize your profit over 30 days!</p>
+            <p>Here's what the game looks like:</p>
+            <img src="files/example.png" alt="Game Instructions">
+        </div>
+        <div id="more-projects">
+            <p>Check out <a href="https://github.com/toonmares" target="_blank">more of my projects</a>!</p>
+            <p>made by toonmares</p>
+        </div>
+    </div>
+    
+    <div id="game-container">
+        <div id="data-container">
+            <p id="day">Day: 1</p>
+            <p id="stock-price">Stock Price: $10.00</p>
+            <p id="portfolio">Portfolio Value: $100.00</p>
+            <p id="shares">Shares: 0</p>
+        </div>
+        
+        <button id="buy-btn">Buy Stock</button>
+        <button id="sell-btn">Sell Stock</button>
+        <p id="message"></p>
+        
+        <!-- Chart Container -->
+        <div id="chart-container">
+            <canvas id="stockChart"></canvas>
+        </div>
+    </div>
+    
+    <div id="end-container">
+        <p id="profit-loss"></p>
+        <button id="play-again-btn">Play Again</button>
+    </div>
+    
+    <!-- Include Chart.js from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
