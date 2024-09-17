@@ -3,7 +3,7 @@ let initialStockPrice = 10.00;
 let cash = 100.00;  // Cash on hand
 let shares = 0;  // Number of shares owned
 let day = 1;
-let totalDays = 30;
+let totalDays = 30;  // Default value
 let stockPrices = [stockPrice];  // Array to store stock prices for each day
 let days = [1];  // Array to store day numbers for chart
 
@@ -14,6 +14,7 @@ const sharesElement = document.getElementById('shares');
 const messageElement = document.getElementById('message');
 const gameContainer = document.getElementById('game-container');
 const startContainer = document.getElementById('start-container');
+const selectDaysContainer = document.getElementById('select-days-container');
 const playAgainButton = document.getElementById('play-again-btn');
 const endContainer = document.getElementById('end-container');
 const profitLossElement = document.getElementById('profit-loss');
@@ -56,8 +57,23 @@ const stockChart = new Chart(ctx, {
 
 document.getElementById('buy-btn').addEventListener('click', buyStock);
 document.getElementById('sell-btn').addEventListener('click', sellStock);
-document.getElementById('start-btn').addEventListener('click', startGame);
+document.getElementById('start-btn').addEventListener('click', showDaySelection);
 document.getElementById('play-again-btn').addEventListener('click', playAgain);
+document.querySelectorAll('#select-days-container button').forEach(button => {
+    button.addEventListener('click', selectDays);
+});
+
+// Show the day selection screen
+function showDaySelection() {
+    startContainer.style.display = 'none';
+    selectDaysContainer.style.display = 'block';
+}
+
+// Handle day selection
+function selectDays(event) {
+    totalDays = parseInt(event.target.getAttribute('data-days'));
+    startGame();
+}
 
 // Update the UI and chart colors
 function updateUI() {
@@ -127,8 +143,8 @@ function sellStock() {
 
 // Start the game
 function startGame() {
-    // Hide the start button, show the game container
-    startContainer.style.display = 'none';
+    // Hide the day selection, show the game container
+    selectDaysContainer.style.display = 'none';
     gameContainer.style.display = 'block';
     endContainer.style.display = 'none';  // Hide the end container
 
@@ -149,7 +165,7 @@ function startGame() {
     runGame();
 }
 
-// Run the game for 30 days
+// Run the game for the selected number of days
 function runGame() {
     const interval = setInterval(() => {
         if (day > totalDays) {
@@ -195,5 +211,3 @@ function playAgain() {
 
     messageElement.innerText = '';  // Clear any message
 }
-
-updateUI();
